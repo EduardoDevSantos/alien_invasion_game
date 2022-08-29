@@ -1,21 +1,21 @@
-from settings import Settings
-from ship import Ship
-import game_functions as gf
+import sys
 import pygame
+
+
 def run_game():
-    # Inicaliza o pygame, as configurações e o objeto screen
+    # Inicializa o jogo e cria um objeto para a tela
     pygame.init()
-    ai_settings = Settings()
-    screen = pygame.display.set_mode(
-        (ai_settings.screen_width, ai_settings.screen_height)
-        )
+    # O objeto screen é uma superfice
+    screen = pygame.display.set_mode((1200, 720))
     pygame.display.set_caption("Alien Invasion")
-    # Cria uma espaçonave
-    ship = Ship(ai_settings,screen)
     # Inicia o laço principal do jogo
     while True:
-        gf.check_events(ship)
-        ship.update()
-        gf.update_screen(ai_settings, screen, ship)
+        # Observa eventos de teclado e de mouse
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            # Deixa a tela mais recente visível
+            pygame.display.flip()
+
 
 run_game()
